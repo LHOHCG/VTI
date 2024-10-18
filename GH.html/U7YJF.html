@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUBG-Download</title>
+    <style>
+        /* تنسيق الصفحة العامة */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1A1A1D; /* لون خلفية داكن */
+            color: #FFFFFF; /* لون النص فاتح */
+            overflow-x: hidden; /* لإزالة التمرير الأفقي */
+            scroll-behavior: smooth; /* سلاسة التمرير بين الأقسام */
+        }
+
+        /* شريط القوائم */
+        header {
+            background-color: #2c3e50; /* لون داكن */
+            padding: 15px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        header nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        header nav ul li a {
+            color: #ecf0f1; /* لون نص الرابط */
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #f39c12; /* تأثير التغيير عند التمرير فوق الرابط */
+            transform: scale(1.1); /* تكبير الرابط عند التمرير */
+        }
+
+        /* قسم البطل */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('background.jpg') no-repeat center center/cover; /* صورة خلفية من اللعبة */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* لون تظليل إضافي */
+            z-index: 1;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: slideDown 1s ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            animation: slideDown 1s ease-in-out 0.5s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-primary {
+            background-color: #f39c12; /* لون الزر */
+            color: #fff;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-primary:hover {
+            background-color: #e67e22; /* تغيير لون الزر عند التمرير */
+            transform: scale(1.05); /* تكبير الزر قليلاً */
+        }
+
+        /* قسم التحميل */
+        .downloads-section {
+            padding: 60px 20px;
+            background-color: #1A1A1D; /* لون خلفية القسم */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .downloads-section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .game-cards {
+            display: flex;
+            flex-wrap: wrap; /* للسماح بتغليف العناصر */
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .game-card {
+            background-color: #ecf0f1; /* لون خلفية البطاقة */
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            width: 220px; /* عرض ثابت */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px); /* رفع البطاقة قليلاً عند التمرير */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* زيادة الظل عند التمرير */
+        }
+
+        .game-card h3 {
+            margin-bottom: 15px;
+        }
+
+        .game-card a {
+            color: #2980b9; /* لون نص الرابط */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .game-card a:hover {
+            color: #3498db; /* تغيير لون الرابط عند التمرير */
+        }
+
+        /* قسم الدعم الفني */
+        .support-section {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #1A1A1D; /* لون خلفية القسم */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .support-section a {
+            color: #2980b9; /* لون نص الرابط */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .support-section a:hover {
+            color: #3498db; /* تغيير لون الرابط عند التمرير */
+        }
+
+        /* الفوتر */
+        footer {
+            background-color: #2c3e50; /* لون داكن */
+            padding: 20px;
+            text-align: center;
+            color: #ecf0f1; /* لون النص */
+        }
+
+        /* مؤثرات التحريك */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط القوائم -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>PUBG-Download</h1>
+            </div>
+            <ul>
+                <li><a href="#home">الصفحة الرئيسية</a></li>
+                <li><a href="#downloads">تحميل الألعاب</a></li>
+                <li><a href="#support">الدعم الفني</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- قسم البطل -->
+    <section id="home" class="hero">
+        <h2>مرحبا بك في PUBG-Download!</h2>
+        <p>استمتع بأحدث إصدارات لعبة ببجي.</p>
+        <a href="#downloads" class="btn-primary">استكشف الآن</a>
+    </section>
+
+    <!-- قسم التحميل -->
+    <section id="downloads" class="downloads-section">
+        <h2>اختر لعبتك</h2>
+        <div class="game-cards">
+            <div class="game-card">
+                <h3>PUBG Mobile</h3>
+                <a href="https://www.pubg.com/en-US/download/" target="_blank">تحميل PUBG Mobile</a>
+            </div>
+            <div class="game-card">
+                <h3>PUBG Lite</h3>
+                <a href="https://lite.pubg.com/" target="_blank">تحميل PUBG Lite</a>
+            </div>
+            <div class="game-card">
+                <h3>PUBG PC</h3>
+                <a href="https://www.pubg.com/en-US/download/" target="_blank">تحميل PUBG PC</a>
+            </div>
+            <div class="game-card">
+                <h3>PUBG النسخة الصينية</h3>
+                <a href="https://www.pubgmobile.com/" target="_blank">تحميل PUBG النسخة الصينية</a>
+            </div>
+            <div class="game-card">
+                <h3>PUBG النسخة الكورية</h3>
+                <a href="https://www.pubgmobile.com/" target="_blank">تحميل PUBG النسخة الكورية</a>
+            </div>
+            <div class="game-card">
+                <h3>PUBG النسخة البيتا</h3>
+                <a href="
+                <h3>PUBG النسخة البيتا</h3>
+                <a href="https://www.pubgmobile.com/" target="_blank">تحميل PUBG النسخة البيتا</a>
+            </div>
+            <div class="game-card">
+                <h3>PUBG iPhone</h3>
+                <a href="https://apps.apple.com/us/app/pubg-mobile/id1330123889" target="_blank">تحميل PUBG iPhone</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الدعم الفني -->
+    <section id="support" class="support-section">
+        <h2>الدعم الفني</h2>
+        <p>إذا واجهت أي مشكلة، يرجى التواصل معنا عبر البريد الإلكتروني:</p>
+        <p><a href="mailto:swatvti@gmail.com">swatvti@gmail.com</a></p>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <p>&copy; 2024 PUBG-Download. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // تحميل الصور بشكل كسول
+        document.addEventListener("DOMContentLoaded", function() {
+            const lazyImages = document.querySelectorAll("img[data-src]");
+            const lazyLoad = () => {
+                lazyImages.forEach(image => {
+                    const rect = image.getBoundingClientRect();
+                    if (rect.top < window.innerHeight) {
+                        image.src = image.getAttribute("data-src");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", lazyLoad);
+        });
+    </script>
+</body>
+</html>
